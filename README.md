@@ -2,7 +2,7 @@
 
 This toolkit accompanies the paper:
 
-[**Multilingual Task-Oriented Dialogue System Development and Evaluation with Large Language Models**](https://arxiv.org/abs/2401.02208)
+[**DIALIGHT: Lightweight Multilingual Development and Evaluation of Task-Oriented Dialogue Systems with Large Language Models**](https://arxiv.org/abs/2401.02208)
 
 Developed with ❤️️ by [Songbo Hu](https://songbohu.github.io), [Xiaobin Wang](https://github.com/wxb9585), [Zhangdie Yuan](https://www.moyyuan.com), [Anna Korhonen](https://sites.google.com/site/annakorhonen/), and [Ivan Vulić](https://sites.google.com/site/ivanvulic/).
 
