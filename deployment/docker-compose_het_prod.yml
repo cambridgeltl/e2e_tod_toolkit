@@ -1,0 +1,70 @@
+version: '3.1'
+
+services:
+    
+    client:
+        build: 
+            context: ../human_eval_tool/client/
+            dockerfile: deploy/Dockerfile
+        container_name: client
+        volumes:
+            - ../human_eval_tool/client:/usr/app
+            # - frontend:/usr/app/frontend
+            - /usr/app/node_modules
+            - ./.env:/usr/app/.env.production
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        networks:
+            my-network:
+                aliases:
+                    - client
+
+    server:
+        build:
+            context: ../human_eval_tool/server/
+            dockerfile: deploy/Dockerfile
+        container_name: server
+        command: gunicorn --bind 0.0.0.0:5000 --workers 4 --pythonpath /server --worker-class eventlet app:app --log-level Debug
+        restart: unless-stopped
+        ports:
+            - "5000:5000"
+        environment:
+            - MODEL_NAME=${MODEL_NAME}
+            - MODEL_TYPE=${MODEL_TYPE}
+        volumes:
+            - ../human_eval_tool/server:/server
+            # - $TASK_PATH:$TASK_PATH
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        env_file:
+            - .env
+        networks:
+            my-network:
+                aliases:
+                    - server
+
+    nginx:
+        image: nginx
+        container_name: nginx
+        restart: unless-stopped
+        volumes:
+            - ../human_eval_tool/client/build:/usr/share/nginx/html
+            # - frontend:/usr/share/nginx/html
+            - ./nginx/pro.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx/ssl:/etc/nginx/ssl
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        networks:
+            - my-network
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        env_file:
+            - .env
+        depends_on:
+            - client
+            - server
+
+networks:
+    my-network:

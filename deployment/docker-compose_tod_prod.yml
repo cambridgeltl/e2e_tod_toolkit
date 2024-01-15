@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+    worker:
+        build: 
+            context: ../tod_system/
+            dockerfile: human_eval_service/deploy/Dockerfile
+        container_name: tod_worker_${MODEL_NAME}_${MODEL_TYPE}
+        restart: unless-stopped
+        command: celery -A human_eval_service.celery_worker.celery_app worker --loglevel info --pool=solo --logfile /root/tod_system/logs/celery_worker.log -Q ${MODEL_NAME}_${MODEL_TYPE}
+        environment:
+            - MODEL_NAME=${MODEL_NAME}
+            - MODEL_TYPE=${MODEL_TYPE}
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        env_file:
+            - .env
+        volumes:
+            - ../data/worker/${MODEL_NAME}_${MODEL_TYPE}/logs:/root/tod_system/logs
+        
