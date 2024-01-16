@@ -6,10 +6,26 @@ services:
     ports:
       - "27017:27017"
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root12345 
-      TZ: Asia/Shanghai
+    env_file:
+      - .env
     volumes:
       - "../data/mongo/:/data/db"
       - "../data/mongo/logs:/var/log/mongodb"
+    
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+
+
+networks:
+  default:
+    name: mongodb_network
