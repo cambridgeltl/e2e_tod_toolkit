@@ -22,6 +22,7 @@ services:
       - 8081:8081
     environment:
       - ME_CONFIG_OPTIONS_EDITORTHEME=3024-night
+      - ME_CONFIG_MONGODB_SERVER=mongodb
     env_file:
       - .env
     depends_on:
