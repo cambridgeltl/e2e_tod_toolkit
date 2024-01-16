@@ -11,10 +11,8 @@ services:
         environment:
             - MODEL_NAME=${MODEL_NAME}
             - MODEL_TYPE=${MODEL_TYPE}
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
         env_file:
             - .env
         volumes:
             - ../data/worker/${MODEL_NAME}_${MODEL_TYPE}/logs:/root/tod_system/logs
-        
+        network_mode: host
