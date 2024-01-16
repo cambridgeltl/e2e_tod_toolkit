@@ -6,6 +6,8 @@ services:
     ports:
       - "27017:27017"
     restart: always
+    extra_hosts:
+            - "host.docker.internal:host-gateway"
     env_file:
       - .env
     volumes:
@@ -13,7 +15,7 @@ services:
       - "../data/mongo/logs:/var/log/mongodb"
     
   mongo-express:
-    image: mongo-express
+    image: mongo-express:latest
     container_name: mongo-express
     restart: always
     ports:
