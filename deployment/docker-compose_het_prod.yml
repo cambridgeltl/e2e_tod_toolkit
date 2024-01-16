@@ -12,13 +12,7 @@ services:
             # - frontend:/usr/app/frontend
             - /usr/app/node_modules
             - ./.env:/usr/app/.env.production
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-        networks:
-            my-network:
-                aliases:
-                    - client
-
+        network_mode: host
     server:
         build:
             context: ../human_eval_tool/server/
@@ -38,10 +32,7 @@ services:
             - "host.docker.internal:host-gateway"
         env_file:
             - .env
-        networks:
-            my-network:
-                aliases:
-                    - server
+        network_mode: host
 
     nginx:
         image: nginx
@@ -56,15 +47,9 @@ services:
             - "80:80"
             - "443:443"
             - "8080:8080"
-        networks:
-            - my-network
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
+        network_mode: host
         env_file:
             - .env
         depends_on:
             - client
             - server
-
-networks:
-    my-network:
