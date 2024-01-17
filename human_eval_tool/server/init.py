@@ -24,6 +24,7 @@ from kombu import Queue
 import logging
 
 bcrypt = Bcrypt()
+adminpymongo = PyMongo()
 pymongo = PyMongo()
 jwt = JWTManager()
 cors = CORS()
