@@ -11,7 +11,7 @@ from logging.config import dictConfig
 
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, get_jwt, create_access_token, get_jwt_identity
-from init import bcrypt, jwt, pymongo, cors, make_celery, adminpymongo
+from init import bcrypt, jwt, pymongo, cors, make_celery
 from service.LoginUser import LoginUser
 from view.authentication import auth
 from service.socketio import socketIO_init
@@ -60,15 +60,14 @@ def page_not_found(e):
 # init all the service
 bcrypt.init_app(app)
 jwt.init_app(app)
-adminpymongo.init_app(app,uri=os.getenv('MONGO_URI', 'mongodb://localhost:27017/human_eval_tool')+"admin")
-pymongo.init_app(app,uri=os.getenv('MONGO_URI', 'mongodb://localhost:27017/human_eval_tool')+os.getenv('MODEL_NAME','mt5'))
+pymongo.init_app(app)
 cors.init_app(app)
 
 celery = make_celery(app)
 # celery = make_celery("./config/config.cfg",app)
 socketd = socketIO_init(app,celery)
 app.register_error_handler(404, page_not_found)
-adminpymongo.db.command("updateUser", "admin", pwd=os.getenv('MONGO_INITDB_ROOT_PASSWORD', 'Humaneval12345'), roles=[{"role": "dbOwner", "db": os.getenv('MODEL_NAME','mt5')}])
+
 logging.getLogger('flask_cors').level = logging.DEBUG
 
 @app.after_request
