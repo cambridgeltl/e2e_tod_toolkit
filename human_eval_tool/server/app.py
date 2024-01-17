@@ -60,8 +60,8 @@ def page_not_found(e):
 # init all the service
 bcrypt.init_app(app)
 jwt.init_app(app)
-adminpymongo.init_app(app,uri=os.getenv('MONGO_URI', 'mongodb://localhost:27017/human_eval_tool')+"/admin")
-pymongo.init_app(app,uri=os.getenv('MONGO_URI', 'mongodb://localhost:27017/human_eval_tool')+"/"+os.getenv('MODEL_NAME','mt5'))
+adminpymongo.init_app(app,uri=os.getenv('MONGO_URI', 'mongodb://localhost:27017/human_eval_tool')+"admin")
+pymongo.init_app(app,uri=os.getenv('MONGO_URI', 'mongodb://localhost:27017/human_eval_tool')+os.getenv('MODEL_NAME','mt5'))
 cors.init_app(app)
 
 celery = make_celery(app)
