@@ -117,14 +117,14 @@ class ICLOpenAIDSTModel(DSTModel):
 
     def get_instruction_prompt(self):
 
-        instruction = "Following the instructions, predict the belief state based on the history."
+        instruction = "Following the instructions, predict the dialogue state based on the history."
 
         train_example_instruction = "The following are some examples of input and expected output pairs. " + \
                                     self.get_random_incontext_learning_examples(self.number_training_example)
 
-        output_format_instruction = "The predicted output should be in JSON format. The output should be in the format of {domain : { slot : value }}. Please note that there may be one or multiple domains in a dialogue."
+        output_format_instruction = "The predicted output should be in the JSON format. The output should be in the format of {domain : { slot : value }}. Please note that there may be one or multiple domains in a dialogue."
 
-        ontology_instruction = "domain should be in one of the following values: " + str(multiwoz_domains) + ". Please do not output a domain if it is not mentioned in the dialogue."
+        ontology_instruction = "Domain should be in one of the following values: " + str(multiwoz_domains) + ". Please do not output a domain if it is not mentioned in the dialogue."
         ontology_instruction = ontology_instruction + " The slot can be one of the following values: " + str(multiwoz_slots) + ". Please do not output a slot if it is not mentioned in the dialogue or the user does not care about the value of the slot."
 
         categorical_slot_instruction = "There are " + str(len(categorical_value_mapping)) +  " categorical slots, which the values of these slots are from a closed set."
@@ -221,14 +221,14 @@ class ICLLlamacppDSTModel(DSTModel):
 
     def get_instruction_prompt(self):
 
-        instruction = "Following the instructions, predict the belief state based on the history."
+        instruction = "Following the instructions, predict the dialogue state based on the history."
 
         train_example_instruction = "The following are some examples of input and expected output pairs. " + \
                                     self.get_random_incontext_learning_examples(self.number_training_example)
 
-        output_format_instruction = "The predicted output should be in JSON format. The output should be in the format of {domain : { slot : value }}. Please note that there may be one or multiple domains in a dialogue."
+        output_format_instruction = "The predicted output should be in the JSON format. The output should be in the format of {domain : { slot : value }}. Please note that there may be one or multiple domains in a dialogue."
 
-        ontology_instruction = "domain should be in one of the following values: " + str(multiwoz_domains) + ". Please do not output a domain if it is not mentioned in the dialogue."
+        ontology_instruction = "Domain should be in one of the following values: " + str(multiwoz_domains) + ". Please do not output a domain if it is not mentioned in the dialogue."
         ontology_instruction = ontology_instruction + " The slot can be one of the following values: " + str(multiwoz_slots) + ". Please do not output a slot if it is not mentioned in the dialogue or the user does not care about the value of the slot."
 
         categorical_slot_instruction = "There are " + str(len(categorical_value_mapping)) +  " categorical slots, which the values of these slots are from a closed set."
@@ -322,14 +322,14 @@ class ICLHuggingfaceDSTModel(DSTModel):
 
     def get_instruction_prompt(self):
 
-        instruction = "Following the instructions, predict the belief state based on the history."
+        instruction = "Following the instructions, predict the dialogue state based on the history."
 
         train_example_instruction = "The following are some examples of input and expected output pairs. " + \
                                     self.get_random_incontext_learning_examples(self.number_training_example)
 
-        output_format_instruction = "The predicted output should be in JSON format. The output should be in the format of {domain : { slot : value }}. Please note that there may be one or multiple domains in a dialogue."
+        output_format_instruction = "The predicted output should be in the JSON format. The output should be in the format of {domain : { slot : value }}. Please note that there may be one or multiple domains in a dialogue."
 
-        ontology_instruction = "domain should be in one of the following values: " + str(multiwoz_domains) + ". Please do not output a domain if it is not mentioned in the dialogue."
+        ontology_instruction = "Domain should be in one of the following values: " + str(multiwoz_domains) + ". Please do not output a domain if it is not mentioned in the dialogue."
         ontology_instruction = ontology_instruction + " The slot can be one of the following values: " + str(multiwoz_slots) + ". Please do not output a slot if it is not mentioned in the dialogue or the user does not care about the value of the slot."
 
         categorical_slot_instruction = "There are " + str(len(categorical_value_mapping)) +  " categorical slots, which the values of these slots are from a closed set."
