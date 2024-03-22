@@ -142,8 +142,6 @@ Once deployed, access the tool via the specified IP or domain name and enjoy its
 
 > **Quick Test Example**:
 > 
-> We provide an example deployment at **www.dialeval.online**.
-> 
 > For a quick test with our provided mt5 model, ensure your machine meets the minimum requirements (8GB RAM, 4-core x86 server with Docker and Docker Compose). Set `MONGO_URI`(if you deploy mongodb with this tutorial, you don't need to change this), `ADMIN_EMAIL`, and `REACT_APP_SERVER_URL` (your machine IP address or domain name). Then execute the following deployment commands sequentially:
 >```
 >bash deploy.sh --component=redis

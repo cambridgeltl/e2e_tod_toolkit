@@ -10,6 +10,7 @@ Developed with ❤️️ by [Songbo Hu](https://songbohu.github.io), [Xiaobin Wa
 
 ## Highlights
 
+- [2024-03-20] DIALIGHT has been accepted at NAACL-HLT System Demonstrations 2024.
 - [2024-01-15] We release our toolkit together with our introductory paper. 🎉
 
 
